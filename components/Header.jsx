@@ -1,0 +1,64 @@
+"use client";
+
+import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
+
+export default function Header() {
+  const { user, logout, loading } = useAuth();
+
+  if (loading) return null;
+
+  return (
+    <header className="border-b border-gray-200 bg-[#FAFAFA]">
+      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        {/* Logo */}
+        <Link
+          href="/"
+          className="text-xl font-semibold tracking-wide text-[#5A1A2E]"
+        >
+          Velvet & Vine
+        </Link>
+
+        {/* Navigation */}
+        <div className="flex items-center gap-6 text-sm font-medium">
+          {!user && (
+            <>
+              <Link
+                href="/login"
+                className="text-gray-700 hover:text-[#5A1A2E] transition"
+              >
+                Login
+              </Link>
+
+              <Link
+                href="/register"
+                className="px-4 py-2 rounded-md bg-[#5A1A2E] text-white hover:bg-[#4A1626] transition"
+              >
+                Register
+              </Link>
+            </>
+          )}
+
+          {user && (
+            <>
+              <Link
+                href="/orders"
+                className="text-gray-700 hover:text-[#5A1A2E] transition"
+              >
+                My Orders
+              </Link>
+
+              <button
+                onClick={logout}
+                className="text-[#C9A24D] hover:text-[#B08E3C] transition"
+              >
+                Logout
+              </button>
+            </>
+          )}
+        </div>
+      </nav>
+    </header>
+  );
+}
