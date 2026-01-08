@@ -9,7 +9,7 @@ export default function Header() {
   if (loading) return null;
 
   return (
-    <header className="border-b border-gray-200 bg-[#FAFAFA]">
+    <header className="fixed top-0 left-0 w-full border-b border-gray-200 bg-[#FAFAFA] z-50">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
         {/* Logo */}
