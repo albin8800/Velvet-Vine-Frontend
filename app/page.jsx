@@ -78,7 +78,7 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-5 gap-3">
-        {products.slice(0, 10).map((product) => (
+        {products.slice(0, 20).map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
       </div>
