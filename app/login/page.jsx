@@ -38,7 +38,7 @@ export default function LoginPage() {
     <main className="min-h-screen bg-[#FAFAFA] flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-sm border border-gray-200 p-8">
 
-        {/* Heading */}
+       
         <h1 className="text-2xl font-semibold text-center text-[#5A1A2E]">
           Welcome Back
         </h1>
@@ -46,14 +46,14 @@ export default function LoginPage() {
           Sign in to your Velvet & Vine account
         </p>
 
-        {/* Error */}
+        
         {error && (
           <div className="mt-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md px-4 py-2">
             {error}
           </div>
         )}
 
-        {/* Form */}
+       
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -92,7 +92,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {/* Footer */}
+       
         <p className="mt-6 text-center text-sm text-gray-500">
           Don’t have an account?{" "}
           <a
