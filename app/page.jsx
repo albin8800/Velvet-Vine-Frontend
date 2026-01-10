@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 md:mt-32">
     
       <div className="flex flex-col gap-2 mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-[#0D141C]">
