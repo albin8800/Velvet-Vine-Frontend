@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProductCard({ product }) {
   const imageSrc =
@@ -7,8 +8,10 @@ export default function ProductCard({ product }) {
       : "/placeholder-product.png";
 
   return (
+
+    <Link href={`/products/${product._id}`}>
     <div className="mt-8 flex flex-col gap-3 transition ">
-      {/* Image */}
+     
       <div>
         <Image
           src={imageSrc}
@@ -28,7 +31,7 @@ export default function ProductCard({ product }) {
         />
       </div>
 
-      {/* Info */}
+    
       <div className="flex flex-col gap-1">
         <h2 className="text-[#0D141C] text-[14px] sm:text-[15px] lg:text-[16px] font-medium">
           {product.name}
@@ -38,5 +41,6 @@ export default function ProductCard({ product }) {
         </p>
       </div>
     </div>
+    </Link>
   );
 }
