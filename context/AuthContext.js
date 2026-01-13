@@ -6,20 +6,22 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const storedToken = localStorage.getItem("token");
 
-    if (!token) {
+    if (!storedToken) {
       setLoading(false);
       return;
     }
 
     try {
-      const payload = JSON.parse(atob(token.split(".")[1]));
+      const payload = JSON.parse(atob(storedToken.split(".")[1]));
       setUser({ id: payload.id, role: payload.role });
+      setToken(storedToken);
     } catch (err) {
       localStorage.removeItem("token");
       setError("Invalid token. Please log in again.");
@@ -31,11 +33,12 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
+    setToken(null);
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, loading, error, logout }}
+      value={{ user, token, setUser, loading, error, logout }}
     >
       {children}
     </AuthContext.Provider>

@@ -2,17 +2,23 @@
 
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 
 export default function Header() {
   const { user, logout, loading } = useAuth();
+  const { cart } = useCart();
 
   if (loading) return null;
+
+  const cartCount = cart.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
 
   return (
     <header className="fixed top-0 left-0 w-full border-b border-gray-200 bg-[#FAFAFA] z-50">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-        {/* Logo */}
+    
         <Link
           href="/"
           className="text-xl font-semibold tracking-wide text-[#5A1A2E]"
@@ -20,7 +26,7 @@ export default function Header() {
           Velvet & Vine
         </Link>
 
-        {/* Navigation */}
+       
         <div className="flex items-center gap-6 text-sm font-medium">
           {!user && (
             <>
@@ -42,6 +48,19 @@ export default function Header() {
 
           {user && (
             <>
+           
+              <Link
+                href="/cart"
+                className="relative text-gray-700 hover:text-[#5A1A2E] transition"
+              >
+                Cart
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-3 text-xs bg-[#5A1A2E] text-white rounded-full px-2 py-[1px]">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+
               <Link
                 href="/orders"
                 className="text-gray-700 hover:text-[#5A1A2E] transition"

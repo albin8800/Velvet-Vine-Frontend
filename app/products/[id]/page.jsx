@@ -4,11 +4,13 @@ import api from "@/lib/axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useCart } from "@/context/CartContext";
 
 export default function ProductDetails() {
 
     const {id} = useParams();
     const [product, setProduct] = useState(null);
+    const { addToCart } = useCart();
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -57,7 +59,7 @@ export default function ProductDetails() {
         </p>
 
        
-        <button className="mt-6 w-fit px-8 py-3 bg-[#0D141C] text-white rounded-lg hover:opacity-90 transition">
+        <button onClick={() => addToCart(product._id)} className="mt-6 w-fit px-8 py-3 bg-[#0D141C] text-white rounded-lg hover:opacity-90 transition">
           Add to Cart
         </button>
       </div>
