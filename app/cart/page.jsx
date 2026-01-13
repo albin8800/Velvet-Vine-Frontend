@@ -2,9 +2,23 @@
 
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
+import api from "@/lib/axios";
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
+
+   
   const { cart, loading, updateQuantity, removeFromCart } = useCart();
+   const router = useRouter();
+
+   const placeOrder = async () => {
+  try {
+    await api.post("/api/orders");
+    router.push("/orders");
+  } catch (error) {
+    alert("Failed to place order");
+  }
+};
 
   if (loading) {
     return <div className="mt-32 text-center">Loading cart...</div>;
@@ -18,6 +32,11 @@ export default function CartPage() {
     (sum, item) => sum + item.product.price * item.quantity,
     0
   );
+
+  
+
+
+
 
   return (
     <section className="max-w-5xl mx-auto px-6 mt-24">
@@ -79,9 +98,13 @@ export default function CartPage() {
 
       <div className="mt-8 flex justify-between items-center">
         <p className="text-lg font-semibold">Total: ₹{total}</p>
-        <button className="px-6 py-3 bg-black text-white rounded-lg">
-          Checkout
-        </button>
+        <button
+  onClick={placeOrder}
+  className="px-6 py-3 bg-black text-white rounded-lg"
+>
+  Place Order
+</button>
+
       </div>
     </section>
   );
